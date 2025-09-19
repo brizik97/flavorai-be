@@ -20,6 +20,13 @@ export class RecipeService {
     return this.prisma.recipe.findMany();
   }
 
+  findAllByUserId(userId?: string) {
+    if (!userId) return [];
+    return this.prisma.recipe.findMany({
+      where: { authorId: +userId },
+    });
+  }
+
   findOne(id: number) {
     return this.prisma.recipe.findUnique({
       where: { id },

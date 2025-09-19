@@ -18,4 +18,11 @@ export class RecipeController {
   findAll() {
     return this.recipeService.findAll();
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('my')
+  findAllByUser(@Req() req) {
+    const userId = req?.user?.id;
+    return this.recipeService.findAllByUserId(userId);
+  }
 }
